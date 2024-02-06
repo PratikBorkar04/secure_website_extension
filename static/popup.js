@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (currentTab && currentTab.url) {
             console.log("Current tab URL:", currentTab.url);
 
-            fetch('http://localhost:5000/predict', {
+            fetch('https://secure-website-extension.onrender.com/predict', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Wait for the fade-out to finish before closing the window
             setTimeout(function() {
                 window.close();
-            }, 500); // This delay should match the CSS transition time
+            }, 10); // This delay should match the CSS transition time
         });
     }
 });
