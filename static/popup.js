@@ -2,8 +2,6 @@ document.addEventListener('DOMContentLoaded', function() {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         var currentTab = tabs[0];
         if (currentTab && currentTab.url) {
-            console.log("Current tab URL:", currentTab.url);
-
             fetch('https://secure-website-extension.onrender.com/predict', {
                 method: 'POST',
                 headers: {
@@ -23,23 +21,27 @@ document.addEventListener('DOMContentLoaded', function() {
                     resultElement.classList.remove('result-safe');
                 }
                 resultElement.style.visibility = 'visible';
+                resultElement.style.opacity = '1';
 
-                // Make the Close button visible after the result is displayed
                 document.getElementById('close-btn').style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                const resultElement = document.getElementById('prediction-result');
+                resultElement.innerHTML = 'An error occurred. Please try again.';
+                resultElement.style.visibility = 'visible';
+                resultElement.style.opacity = '1';
             });
         }
     });
 
     const closeButton = document.getElementById('close-btn');
-    if(closeButton) {
-        closeButton.addEventListener('click', function() {
-            const container = document.querySelector('.container');
-            container.style.opacity = '0'; // Start the fade-out effect
+    closeButton.addEventListener('click', function() {
+        const container = document.querySelector('.container');
+        container.style.opacity = '0'; // Start the fade-out effect
 
-            // Wait for the fade-out to finish before closing the window
-            setTimeout(function() {
-                window.close();
-            }, 10); // This delay should match the CSS transition time
-        });
-    }
+        setTimeout(function() {
+            window.close(); // Close the window after the fade-out effect
+        }, 10); // Match the CSS transition time
+    });
 });

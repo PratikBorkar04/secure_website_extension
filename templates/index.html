@@ -3,73 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secure Webiste Monitor</title>
+    <title>Secure Website Monitor</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #007bff; /* Updated for a more vibrant blue */
-            --secondary-color: #343a40; /* Updated for a deeper grey */
-            --danger-color: #ff4757; /* Brighter red for enhanced attention */
-            --safe-color: #2ed573; /* Brighter green for a more vibrant confirmation */
-            --text-color: #ffffff; /* Maintained for contrast and readability */
-            --background-color: #f8f9fa; /* Maintained for a subtle background */
-            --shadow-color: rgba(0, 0, 0, 0.1); /* More subtle shadow for modern aesthetics */
+            --primary-color: #007bff;
+            --secondary-color: #343a40;
+            --danger-color: #ff4757;
+            --safe-color: #2ed573;
+            --text-color: #ffffff;
+            --background-color: #f8f9fa;
+            --shadow-color: rgba(0, 0, 0, 0.1);
         }
-
-        body, html {
+        body {
             margin: 0;
             padding: 0;
-            width: 100%;
-            height: 100%;
-            font-family: 'Poppins', sans-serif; /* Modern, clean font */
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: var(--background-color);
+            box-sizing: border-box; /* Ensures the padding and border are included in the element's dimensions */
+            border: 2px  black; 
+            min-height: 100vh;
         }
-
         .container {
-            width: auto;
             max-width: 400px;
             padding: 30px;
             background-color: #fff;
             border-radius: 10px;
             box-shadow: 0 4px 6px var(--shadow-color);
             text-align: center;
-            position: relative;
         }
-
         h1 {
             color: var(--primary-color);
-            font-weight: 600; /* Bolder for emphasis */
+            font-weight: 600;
             margin-bottom: 20px;
         }
-
         .prediction-result {
             margin-top: 20px;
             padding: 20px;
             border-radius: 8px;
             color: var(--text-color);
-            visibility: hidden;
-            transition: visibility 0.3s, opacity 0.3s ease, background-color 0.3s ease; /* Added background-color transition */
-            font-weight: 400; /* Regular weight for readability */
-            overflow: auto;
+            transition: opacity 0.3s ease, background-color 0.3s ease;
+            display: none; /* Initially hidden, can be shown via JS */
+            height: 120px; /* Fixed height */
+            width: 360px; /* Fixed width - adjust as necessary */
+            overflow-y: auto; /* Enable vertical scrolling for overflow */
+            box-sizing: border-box; /* Ensures padding is included in the width */
+            
         }
-
 
         .result-safe, .result-unsafe {
-            visibility: visible;
-            opacity: 1;
+            display: block; /* Shown when classification is done */
         }
-
         .result-safe {
-            background: linear-gradient(135deg, var(--safe-color) 0%, #55efc4 100%); /* Gradient for a modern look */
+            background: linear-gradient(135deg, var(--safe-color) 0%, #55efc4 100%);
         }
-
         .result-unsafe {
-            background: linear-gradient(135deg, var(--danger-color) 0%, #ff6b81 100%); /* Gradient for a modern look */
+            background: linear-gradient(135deg, var(--danger-color) 0%, #ff6b81 100%);
         }
-
         #close-btn {
             position: absolute;
             top: 15px;
@@ -80,23 +73,22 @@
             border-radius: 5px;
             color: var(--text-color);
             cursor: pointer;
-            font-size: 16px; /* Slightly larger for better interaction */
+            font-size: 16px;
             transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
         }
-
         #close-btn:hover {
             background-color: var(--secondary-color);
             transform: scale(1.05);
-            box-shadow: 0 2px 4px var(--shadow-color); /* Subtle shadow on hover for depth */
+            box-shadow: 0 2px 4px var(--shadow-color);
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <button id="close-btn">X</button>
-    <h1>Secure Webiste Monitor</h1>
-    <div id="prediction-result" class="prediction-result">Checking URL...</div>
-</div>
-<script src="/static/popup.js"></script>
+    <div class="container">
+        <button id="close-btn" aria-label="Close">X</button>
+        <h1>Secure Website Monitor</h1>
+        <div id="prediction-result" class="prediction-result" role="alert">Checking URL...</div>
+    </div>
+    <script src="/static/popup.js"></script>
 </body>
 </html>
