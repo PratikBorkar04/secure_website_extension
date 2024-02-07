@@ -201,7 +201,7 @@ def predict():
             result6 = "❌ X-XSS-Protection is not set for the website."
 
         link_score = f"{score}/{total_checks}"
-        stars_visualization = '⭐' * link
+        stars_visualization = '⭐' * link_score
         # Render the prediction results back to the home page template
         response = {
         "prediction_made": prediction_made,
