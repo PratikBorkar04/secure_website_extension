@@ -202,18 +202,7 @@ def predict():
         
 
         stars_count = int((score / total_checks) * 5)  # Assuming you want a max of 5 stars
-        if stars_count == 0:
-            result7 = "☆☆☆☆☆"
-        if stars_count == 1:
-            result7 = "⭐☆☆☆☆"
-        if stars_count == 2:
-            result7 = "⭐⭐☆☆☆"
-        if stars_count == 3:
-            result7 = "⭐⭐⭐☆☆"
-        if stars_count == 4:
-            result7 = "⭐⭐⭐⭐☆"
-        if stars_count == 5:
-            result7 = "⭐⭐⭐⭐⭐"
+        result7 = "⭐" * stars_count + "☆" * (5 - stars_count)
         # Render the prediction results back to the home page template
         response = {
         "prediction_made": prediction_made,

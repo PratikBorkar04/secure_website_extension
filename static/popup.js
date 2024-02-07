@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // Assume 'data.stars' is the number of stars you wish to display
 
-                resultElement.innerHTML = `${data.result1}<h4>Website Rating: ${data.result7}</h4>${data.result2}<br>${data.result3}<br>${data.result4}<br>${data.result5}<br>${data.result6}`;
+                resultElement.innerHTML = `${data.result1}<h4>Website Rating: ${data.link_score}</h4>${data.result2}<br>${data.result3}<br>${data.result4}<br>${data.result5}<br>${data.result6}`;
                 if (data.safe_status === 'safe') {
                     resultElement.classList.add('result-safe');
                     resultElement.classList.remove('result-unsafe');
