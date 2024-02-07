@@ -82,7 +82,8 @@ def predict():
         domain = parsed_url.netloc
         prediction_made = True
 
-
+        score = 0
+        total_checks = 5
         # Counting occurrences of characters and vowels in the domain
         qty_hyphen_domain = domain.count('-')
 
@@ -155,6 +156,7 @@ def predict():
             result1 = f'🟢 Status: {url} website is ✅SAFE to visit.'
             probability = model.predict_proba(input_data_reshaped)[0][1] * 100
             probability = round(probability, 2)
+            score += 1
             result2 = f"🔒 Safety Probability: {probability}% chance of being ✅safe."
             safe_status='safe'
         else:
@@ -166,12 +168,14 @@ def predict():
 
         if is_ssl_certified(url):
             result3 = "✅ SSL Certificate: The website has a valid SSL certificate."
+            score += 1
         else:
             result3 = "❌ SSL Certificate: The website does not have a valid SSL certificate."
             
         server_banner,server_banner_error  = check_server_banner(url)
         if server_banner:
             result4 = "✅ Server banner is present for the website."
+            score += 1
         elif server_banner_error:
             result4 = "❌ Error occurred in checking server banner."
         else:
@@ -181,6 +185,7 @@ def predict():
         hsts_enabled, hsts_error = check_hsts(url)
         if hsts_enabled:
             result5 = "✅ HSTS is enabled for the website."
+            score += 1
         elif hsts_error:
             result5 = "❌ Error occurred in checking HSTS."
         else:
@@ -189,11 +194,26 @@ def predict():
         x_xss_protection, x_xss_error = check_x_xss_protection(url)
         if x_xss_protection:
             result6 = "✅ X-XSS-Protection is set for the website."
+            score += 1
         elif x_xss_error:
             result6 = "❌ Error occurred in checking X-XSS-Protection."
         else:
             result6 = "❌ X-XSS-Protection is not set for the website."
+        
 
+        stars_count = int((score / total_checks) * 5)  # Assuming you want a max of 5 stars
+        if stars_count == 0:
+            result7 = "☆☆☆☆☆"
+        if stars_count == 1:
+            result7 = "⭐☆☆☆☆"
+        if stars_count == 2:
+            result7 = "⭐⭐☆☆☆"
+        if stars_count == 3:
+            result7 = "⭐⭐⭐☆☆"
+        if stars_count == 4:
+            result7 = "⭐⭐⭐⭐☆"
+        if stars_count == 5:
+            result7 = "⭐⭐⭐⭐⭐"
         # Render the prediction results back to the home page template
         response = {
         "prediction_made": prediction_made,
@@ -202,6 +222,7 @@ def predict():
         "result2": result2,
         "result3": result3,
         "result4": result4,
+        "link_score": result7,
         "result5": result5,
         "result6": result6,
         "safe_status": safe_status

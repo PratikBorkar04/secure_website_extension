@@ -12,7 +12,10 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.json())
             .then(data => {
                 const resultElement = document.getElementById('prediction-result');
-                resultElement.innerHTML = `${data.result1}<br>${data.result2}<br>${data.result3}<br>${data.result4}<br>${data.result5}<br>${data.result6}`;
+
+                // Assume 'data.stars' is the number of stars you wish to display
+
+                resultElement.innerHTML = `${data.result1}<h4>Website Rating: ${data.result7}</h4>${data.result2}<br>${data.result3}<br>${data.result4}<br>${data.result5}<br>${data.result6}`;
                 if (data.safe_status === 'safe') {
                     resultElement.classList.add('result-safe');
                     resultElement.classList.remove('result-unsafe');
@@ -45,3 +48,4 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 10); // Match the CSS transition time
     });
 });
+
