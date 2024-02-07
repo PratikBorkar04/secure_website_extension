@@ -78,3 +78,4 @@ function createStarVisualization(score) {
 
     return visualization;
 }
+
