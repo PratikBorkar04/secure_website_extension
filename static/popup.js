@@ -86,3 +86,4 @@ function createStarVisualization(score) {
 
     return visualization; // Return the constructed star visualization
 }
+
