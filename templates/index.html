@@ -2,10 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- Ensures proper rendering and touch zooming -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secure Website Monitor</title>
+    <!-- Importing Poppins font from Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
+        /* Root CSS variables for easy theme management */
         :root {
             --primary-color: #007bff;
             --secondary-color: #343a40;
@@ -15,6 +18,7 @@
             --background-color: #f8f9fa;
             --shadow-color: rgba(0, 0, 0, 0.1);
         }
+        /* Global body styling */
         body {
             margin: 0;
             padding: 0;
@@ -23,10 +27,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            box-sizing: border-box; /* Ensures the padding and border are included in the element's dimensions */
-            border: 2px  black; 
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
             min-height: 100vh;
         }
+        /* Styling for the main content container */
         .container {
             max-width: 400px;
             padding: 30px;
@@ -35,27 +39,29 @@
             box-shadow: 0 4px 6px var(--shadow-color);
             text-align: center;
         }
+        /* Header styling */
         h1 {
             color: var(--primary-color);
             font-weight: 600;
             margin-bottom: 20px;
         }
+        /* Prediction result section styling, hidden by default */
         .prediction-result {
             margin-top: 20px;
             padding: 20px;
             border-radius: 8px;
             color: var(--text-color);
             transition: opacity 0.3s ease, background-color 0.3s ease;
-            display: none; /* Initially hidden, can be shown via JS */
-            height: 120px; /* Fixed height */
-            width: 360px; /* Fixed width - adjust as necessary */
-            overflow-y: auto; /* Enable vertical scrolling for overflow */
-            box-sizing: border-box; /* Ensures padding is included in the width */
-            
+            display: none; /* Initially hidden, shown through JavaScript */
+            height: 120px; /* Fixed height for consistency */
+            width: 360px; /* Fixed width for consistency */
+            overflow-y: auto; /* Allows scrolling for overflow content */
+            box-sizing: border-box; /* Include padding in the calculation of width and height */
         }
 
+        /* Styles for safe and unsafe results */
         .result-safe, .result-unsafe {
-            display: block; /* Shown when classification is done */
+            display: block; /* Ensures they are visible when added */
         }
         .result-safe {
             background: linear-gradient(135deg, var(--safe-color) 0%, #55efc4 100%);
@@ -63,6 +69,7 @@
         .result-unsafe {
             background: linear-gradient(135deg, var(--danger-color) 0%, #ff6b81 100%);
         }
+        /* Close button styling */
         #close-btn {
             position: absolute;
             top: 15px;
@@ -76,6 +83,7 @@
             font-size: 16px;
             transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
         }
+        /* Hover effect for the close button */
         #close-btn:hover {
             background-color: var(--secondary-color);
             transform: scale(1.05);
@@ -85,10 +93,14 @@
 </head>
 <body>
     <div class="container">
+        <!-- Close button to dismiss the monitor or alert -->
         <button id="close-btn" aria-label="Close">X</button>
+        <!-- Main heading -->
         <h1>Secure Website Monitor</h1>
+        <!-- Placeholder for dynamic result display -->
         <div id="prediction-result" class="prediction-result" role="alert">Checking URL...</div>
     </div>
+    <!-- JavaScript file for handling dynamic content and UI interactions -->
     <script src="/static/popup.js"></script>
 </body>
 </html>
