@@ -12,6 +12,6 @@
         "16": "static/logo_16.png"
       }
     },
-    "permissions": ["activeTab", "tabs","notifications"]
+    "permissions": ["activeTab", "tabs"]
   }
   
